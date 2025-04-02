@@ -1,13 +1,22 @@
 const Game = (function() {
     // initialize arrays to store choices
-    let userChoices = [];
-    let compChoices = [];
+    let player = "player1";
+    let player1Choices = [];
+    let player2Choices = [];
 
-    function logChoice(input, arr) {
+    function logChoice(input, button) {
+
         // this function takes number 1-9 and stores it in the array
-        if(!userChoices.includes(input) && !compChoices.includes(input)) {
-            if(input >=1 && input <=0) {
-                arr.push(input);
+        if(!player1Choices.includes(input) && !player2Choices.includes(input)) {
+            if(input >=1 && input <=9) {
+                if(player === "player1") {
+                    player1Choices.push(input);
+                    button.innerText="X";
+                }
+                else {
+                    player2Choices.push(input);
+                    button.innerText="O";
+                }
             }
             else {
                 alert("Only numbers between 1-9 are accepted")
@@ -18,8 +27,9 @@ const Game = (function() {
         }
     }
 
-    function checkWin(arr) {
+    function checkWin() {
         // helper function to check if `arr` is in any of the winning combinations
+
         const wins = [
             [1,2,3],
             [4,5,6],
@@ -30,19 +40,39 @@ const Game = (function() {
             [3,6,9],
             [3,5,7]
         ]
-        return wins.some(combo => combo.every(num => arr.includes(num)));
+
+        if(player === "player1") {
+            return wins.some(combo => combo.every(num => player1Choices.includes(num)));
+        }
+        else {
+            return wins.some(combo => combo.every(num => player2Choices.includes(num)));
+        }
+        
     }
 
     function playGame() {
-        // collect player1 input
-        // store it in the array1
-        // check player1 combo for a win
-        // collect player2 input
-        // store it in the array2
-        // check player2 combo for a win
+
+        let clickedSpot = document.querySelectorAll(".gameboard div");
+        clickedSpot.forEach((button, index) => {
+            ++index; // increment to start from 1
+
+            button.onclick = () => {
+                logChoice(index, button);
+                
+                console.log("Player 1 Choices: " + player1Choices);
+                console.log("Player 2 Choices: " + player2Choices);
+
+                if (checkWin()) {
+                    console.log(player + " wins!");
+                }
+                player = player === "player1" ? "player2" : "player1";
+
+            }
+        })
     }
-    
+
     return {playGame};
 
 })();
 
+Game.playGame();

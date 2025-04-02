@@ -4,6 +4,15 @@ html body {
     align-items: center;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    margin-bottom: 50px;
+}
+
 .gameboard {
     display: grid;
     /* width: 300px;
@@ -21,4 +30,8 @@ html body {
     outline-offset: -2px;
     width: 100px;
     height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
 }
