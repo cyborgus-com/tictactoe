@@ -35,3 +35,7 @@ form {
     align-items: center;
     font-size: 30px;
 }
+
+.gameboard div:hover {
+    background-color: rgb(255, 235, 199);
+}
