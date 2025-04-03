@@ -69,11 +69,11 @@ const Game = (function() {
             button.onclick = () => {
                 logChoice(index, button);
                 
-                console.log("Player 1 Choices: " + player1Choices);
-                console.log("Player 2 Choices: " + player2Choices);
+                // console.log("Player 1 Choices: " + player1Choices);
+                // console.log("Player 2 Choices: " + player2Choices);
 
                 if (checkWin()) {
-                    console.log(player + " wins!");
+                    // console.log(player + " wins!");
                     const dialog = document.getElementById('myDialog');
                     const closeBtn = document.getElementById('closeBtn');
                     const wonMessage = document.querySelector('#myDialog p');
