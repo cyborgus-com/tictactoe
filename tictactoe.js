@@ -50,6 +50,16 @@ const Game = (function() {
         
     }
 
+    function clearBoard() {
+        let clickedSpot = document.querySelectorAll(".gameboard div");
+        clickedSpot.forEach((button) => {
+            button.innerText = "";
+            player = "player1";
+            player1Choices = [];
+            player2Choices = [];
+        });
+    }
+
     function playGame() {
 
         let clickedSpot = document.querySelectorAll(".gameboard div");
@@ -64,6 +74,15 @@ const Game = (function() {
 
                 if (checkWin()) {
                     console.log(player + " wins!");
+                    const dialog = document.getElementById('myDialog');
+                    const closeBtn = document.getElementById('closeBtn');
+                    const wonMessage = document.querySelector('#myDialog p');
+                    dialog.showModal();
+                    wonMessage.innerText = player + " won!"
+                    closeBtn.addEventListener('click', () => {
+                        clearBoard();
+                        dialog.close();
+                    });
                 }
                 player = player === "player1" ? "player2" : "player1";
 
